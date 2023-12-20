@@ -1,0 +1,86 @@
+.signUp_main{
+    width: 100vw;
+    height: 100vh;
+    padding: var(--padding_main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.signUp_body{
+    /* width: 50%;
+    height: 70%; */
+    min-width: 50%;
+    min-height: 60%;
+    padding: 2vh 2vw;
+    /* border:2px solid red; */
+    /* background-color: rgb(246, 75, 152); */
+    /* border:2px solid rgb(246, 75, 152); */
+    background-color: black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.signUp_body > h2{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    margin-bottom: 1em;
+}
+.signUp_form{
+    width: 80%;
+    height: 80%;
+    /* border:1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+    margin-top: 1rem;
+
+}
+
+.signUp_form >section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    /* gap: 5%; */
+    font-size: 1.2rem;
+    /* color: #fff; */
+    text-transform: capitalize;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* background-color: red; */
+   
+}
+
+.signUp_form > button{
+    font-size: 1.2rem;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    color: #010101;
+    /* background-color: rgb(5, 203, 5); */
+    border: transparent;
+}
+
+.form_input_lable{
+    flex: 1;
+    
+    
+}
+
+.form_input , #address_input{
+    flex: 1;
+    /* font-size: 1.2rem; */
+ 
+}
+
+
+#signError{
+    margin-top: 1em;
+    color: red;
+}

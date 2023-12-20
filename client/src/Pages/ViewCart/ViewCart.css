@@ -1,0 +1,156 @@
+.viewCart_main{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.viewCart_body{
+    width: 100%;
+    padding: var(--padding_main);
+    display: flex;
+    padding-top: 5vh;
+    
+   
+}
+
+.VC_body_left{
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+
+.VC_body_right{
+    flex: 1;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* border:2px solid red; */
+   
+
+}
+.VC_item{
+    width: 100%;
+    display: flex;
+    height: 15vh;
+    border-bottom: 2px solid black;
+    /* background-color: red; */
+}
+
+.Item_sec-1{
+    
+    flex: 1;
+    /* border:2px solid red; */
+    display: flex;
+}
+.Item_sec-2{
+    
+    /* border:2px solid rgb(60, 0, 255); */
+    flex: 1.5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.IT_Sec-1_left{
+    flex: 1;
+    /* border:1px solid green; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.IT_Sec-1_left > img{
+    height: 100%;
+    max-width: 100%;
+    
+}
+
+.IT_Sec-1_right{
+    /* border:1px solid rgb(128, 0, 124); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    flex: 3;
+}
+
+.IT_Sec-1_right > h4{
+    all: unset;
+    text-transform: capitalize;
+}
+.IT_Sec-1_right > h5{
+    all: unset;
+}
+
+.IT_Sec-2_left{
+    flex: 1;
+    /* border:1px solid rgb(136, 136, 5); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.IT_Sec-2_left > h3{
+    color: rgb(220, 10, 147);
+}
+.IT_Sec-2_left > button{
+    background-color: transparent;
+    border: none;
+    scale: 2;
+    cursor: pointer;
+}
+
+.IT_Sec-2_left > button:hover {
+    & #dlete_svg{
+        color: red;
+    }
+}
+
+
+
+.IT_Sec-2-right{
+    flex: 1;
+    /* border:1px solid rgb(0, 26, 255); */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.IT_Sec-2-right * {
+    width: 10%;
+    font-size: 1.5rem;
+}
+
+.IT_Sec-2-right > span{
+    text-align: center;
+}
+
+.VC_body_right > h3{
+    width: 100%;
+    margin-bottom: 5vh;
+}
+
+.VC_body_right > section{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#Total_price{
+    color: orange;
+}
+
+.VC_body_right > button{
+    margin-top: 2vh;
+    font-size: 1.2rem;
+    padding: 0.5em 1em;
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
+}

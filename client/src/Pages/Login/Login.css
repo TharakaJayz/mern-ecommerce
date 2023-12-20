@@ -1,0 +1,82 @@
+.login_main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.login_body{
+    width: 40%;
+    min-height: 50%;
+    /* border:2px solid rgb(255, 0, 183); */
+    background-color: rgb(129, 252, 129);
+    background-color: rgb(0, 0, 0);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_body > form  {
+    min-width: 50%;
+    height: auto;
+    padding: 2vh 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+   
+    
+}
+.login_body > form > section{
+    display: flex;
+    gap: 2vw;
+    width: 100%;
+    color: #fff;
+    /* border: 1px solid red; */
+}
+
+.lgin_spn{
+    flex: 1;
+   
+}
+.lgin_input{
+    flex: 2;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.1rem;
+    
+}
+
+.login_body > form > p{
+    text-align: center;
+    color: red;
+}
+
+#admin_div> button{
+    /* width: 30%; */
+    font-size: 1.2rem;
+    padding: 0.2em 1.5em;
+}
+
+#admin_div{
+    color: #fff;
+    display: flex;
+    width: 100%;
+    margin-top: 1vh;
+    gap: 5vw;
+    justify-content: flex-end;
+}
+
+#admin_div > section {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+#admin_div > section > input{
+    scale: 1.5;
+}

@@ -1,0 +1,39 @@
+.order_main{
+    width: 100vw;
+    min-height: 100vh;
+    
+}
+
+.order_body{
+    width: 100%;
+    padding: var(--padding_main);
+    padding-top: 5vh;
+    display: flex;
+    gap: 0.5vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order_item{
+    width: 50%;
+    height: 10vh;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.order_item:hover{
+    cursor: pointer;
+    background-color: rgb(205, 207, 205);
+}
+
+.order_item:active{
+    background-color: black;
+}
+.OI_sec1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 1vw;
+}

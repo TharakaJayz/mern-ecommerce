@@ -1,0 +1,51 @@
+.error_main{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(183, 183, 185, 0.544);
+}
+
+.error_body{
+    min-width: 30%;
+    min-height: 30%;
+    padding: 2vh 2vw;
+    background-color: rgb(54, 83, 169);
+    background-color: rgb(9, 9, 9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error_body > p{
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+    text-transform: capitalize;
+    color: #fff;
+}
+
+.error_body > section{
+    display: flex;
+    gap: 1vw;
+}
+
+.error_body > section > button{
+    font-size: 1.2rem;
+    padding: 0.5em 1em;
+    border: transparent;
+    cursor: pointer;
+    color: #020202;
+}
+
+#ER_btn1{
+    /* background-color: rgb(15, 221, 15);
+    background-color: black; */
+   
+}
+#ER_btn2{
+    background-color: rgb(222, 218, 218);
+}

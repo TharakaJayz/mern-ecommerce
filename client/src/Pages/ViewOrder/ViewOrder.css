@@ -1,0 +1,90 @@
+.viewOrder_main{
+    width: 100vw;
+    height: 100vh;
+}
+
+.VO_body{
+    width: 100%;
+    padding: var(--padding_main);
+    display: flex;
+  
+}
+
+.VO_order{
+    /* width: 60%; */
+    flex: 1.5;
+    height: 80vh;
+    border:2px solid blue;
+    margin-top: 2vh;
+    /* text-align: center; */
+    scroll-behavior: auto;
+    overflow-y: scroll;
+}
+
+.VO_order_item{
+    width: 100%;
+    /* background-color: yellow; */
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid grey;
+}
+
+.VO_order_item > div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    padding-left: 5vw;
+    
+}
+
+.VO_order_item > div > section {
+    width: 50%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.VO_order_item > img{
+    width: 9vw;
+    height: auto;
+}
+
+.VO_deliver{
+    flex: 1;
+
+}
+
+.VO_deliver > form {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    /* background-color: yellow; */
+}
+
+.VO_deliver > form > section{
+    display: flex;
+    width: 90%;
+    gap: 2vw;
+    /* border: 1px solid red; */
+    justify-content: flex-end;
+    font-size: 1.5rem;
+}
+
+.VO_deliver > form > section > select{
+    font-size: 1.1rem;
+
+}
+
+#VO_btn_sec{
+    gap: 2;
+    margin-top: 10vh;
+    justify-content: flex-end;
+}
+
+#VO_btn_sec > button{
+
+}
