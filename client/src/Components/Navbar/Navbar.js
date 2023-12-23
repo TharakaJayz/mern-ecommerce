@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { BsCart } from "react-icons/bs";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import { GiShop } from "react-icons/gi";
 const Navbar = () => {
   const loggedUser = {
     // userName: localStorage.getItem("userName"),
@@ -30,6 +31,10 @@ const Navbar = () => {
   return (
     <div className="nav_main">
       <div className="nav_body">
+        <button className="nav_body_btn_home"> <GiShop className="nav_body_btn_home_svg" onClick={()=>{navigation("/");
+        window.location.reload();
+      }}/></button>
+        <div className="nav_body_btn_wrapper">
         {loggedUser.token ? (
           <button
             className="nav_btn login"
@@ -123,6 +128,7 @@ const Navbar = () => {
           <button id="view_cart" onClick={viewCartHandler}>
             View Cart
           </button>
+        </div>
         </div>
       </div>
     </div>

@@ -6,10 +6,16 @@
  /*  Navbar styles*/
   --nav_btn_background:#f5f5f500;
   --navbar_background:#000000;
+  --navbar_height:15vh;
 
   --nav_btn_padding:0.4em 1em;
 
   --nav_btn_color:#fff;
+
+  /* admin home*/
+  --admin_background:rgb(31, 31, 31);
+  --admin_text_color:#fff;
+  --admin_home_height:85vh;
 
 }
 

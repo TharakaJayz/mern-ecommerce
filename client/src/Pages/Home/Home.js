@@ -101,20 +101,23 @@ const Home = () => {
         <section className="home_sec home_sec-2">
           {selectedTitle === "All" &&
             items.map((item) => {
-              return (
-                <div key={item.id}>
-                  {" "}
-                  <ItemCard
-                    imageUrl={item.imageUrl}
-                    title={item.title}
-                    price={item.price}
-                    qty={item.quantity}
-                    id={item.id.toString() }
-                    brand={item.brand}
-                    description={item.description}
-                  />{" "}
-                </div>
-              );
+              if(item.quantity > 0){
+
+                return (
+                  <div key={item.id}>
+                    {" "}
+                    <ItemCard
+                      imageUrl={item.imageUrl}
+                      title={item.title}
+                      price={item.price}
+                      qty={item.quantity}
+                      id={item.id.toString() }
+                      brand={item.brand}
+                      description={item.description}
+                    />{" "}
+                  </div>
+                );
+              }
             })}
 
           {selectedTitle === "Mobile" &&

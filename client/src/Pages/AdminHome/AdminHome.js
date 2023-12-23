@@ -129,7 +129,14 @@ const AdminHome = () => {
           <h2>Add New Product</h2>
           <div id="image_container">
             {" "}
-            <img src={imageInput} alt="item" />
+
+            {/* {imageInput ==="" ? <img src={imageInput} alt="item"  /> : <></>} */}
+          
+            
+
+
+
+            <img src={imageInput} alt="Item"  className={imageInput === "" ? "image_container_image image_hidden":"image_container_image"} />
           </div>
 
           <section>
@@ -141,11 +148,14 @@ const AdminHome = () => {
               onChange={(e) => {
                 setTitleInput(e.target.value);
               }}
+
+              className="AH_form_input"
             />
           </section>
           <section>
             <span>Description</span>
             <input
+            className="AH_form_input"
               type="text"
               name="description"
               value={descInput}
@@ -157,6 +167,7 @@ const AdminHome = () => {
           <section>
             <span>Price</span>
             <input
+            className="AH_form_input"
               type="text"
               name="Price"
               value={priceInput}
@@ -168,6 +179,7 @@ const AdminHome = () => {
           <section>
             <span>quantity</span>
             <input
+            className="AH_form_input"
               type="text"
               name="quantity"
               value={qtyInput}
@@ -179,6 +191,7 @@ const AdminHome = () => {
           <section>
             <span>brand</span>
             <input
+            className="AH_form_input"
               type="text"
               name="brand"
               value={brandInput}
@@ -196,6 +209,9 @@ const AdminHome = () => {
               onChange={(e) => {
                 setCategoryInput(e.target.value);
               }}
+
+              className="AH_form_input_menu"
+
             >
               <option value=""></option>
               <option value="1">Mobile</option>
@@ -206,6 +222,7 @@ const AdminHome = () => {
           <section>
             <span>imageUrl</span>
             <input
+            className="AH_form_input"
               type="text"
               name="imageUrl"
               value={imageInput}
@@ -217,12 +234,14 @@ const AdminHome = () => {
 
           {error.logic && <p>{error.msg}</p>}
 
-          <div>
-            <button type="submit">Add Item</button>
+          <div className="AH_form_btn_div">
+            <button className="AH_form_btn_div_btn" type="submit">Add Item</button>
             <button
+            className="AH_form_btn_div_btn"
               onClick={() => {
                 cancelButtonHandler();
               }}
+              type="reset"
             >
               Cancel
             </button>

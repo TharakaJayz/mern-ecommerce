@@ -1,10 +1,13 @@
 .AH_main{
-    width: 100vw;
-    min-height: 100vh;
+    max-width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .AH_body{
     width: 100%;
+    /* max-height: 100%; */
+    height: var(--admin_home_height);
     padding: var( --padding_main);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
@@ -15,14 +18,14 @@
 
 .AH_form{
     width: 70%;
-    
+    max-height:95%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1vh;
+    gap: 1.2vh;
     padding: 5vh 2vw;
-    background-color: black;
+    background-color: var(--admin_background);
     color: white;
     position: relative;
 }
@@ -35,9 +38,18 @@
     width: 70%;
     display: flex;
     justify-content: space-between;
+    /* border:1px solid red; */
 }
 
-.AH_form > div{
+.AH_form_input{
+    width: 50%;
+}
+
+.AH_form_input_menu{
+    width: 25%;
+}
+
+.AH_form_btn_div{
     width: 70%;
     display: flex;
     gap: 1vw;
@@ -45,9 +57,18 @@
     margin-top: 2vh;
 }
 
-.AH_form > div > button{
+.AH_form_btn_div_btn{
     font-size: 1.1rem;
-    padding: 0.5em 1em;
+    padding: 0.2em 1.5em;
+    border-radius: 5px;
+    border:1px solid black;
+    transition: all 0.4s ease-in-out;
+
+    &:hover{
+        background-color: black;
+        color: #fff;
+        border-color: #fff  ;
+    }
 
 }
 
@@ -63,8 +84,17 @@
     
 }
 
+
+
 #image_container > img{
     border: 2px solid #fff;
     height: 100%;
     width: 200px;
+}
+
+
+.image_hidden{
+    background-color: transparent;
+    border-color: transparent !important;
+    
 }

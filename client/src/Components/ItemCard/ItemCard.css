@@ -75,11 +75,15 @@
     background-color: rgba(0, 0, 0, 0.959);
     cursor: pointer;
     border: transparent;
+    transition: background-color 0.5s ease-in-out,transform 0.5s ease-in-out;
+    text-transform: capitalize;
     &:active{
         background-color: red; 
     }
-    transition: transform 0.5s ease-in-out;
 
+    &:hover{
+        background-color: rgb(251, 97, 1);
+    }
     transform: translateY(100px);
  
 }

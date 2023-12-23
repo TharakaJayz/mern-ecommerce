@@ -6,22 +6,16 @@ import Login from './Pages/Login/Login';
 import ViewCart from './Pages/ViewCart/ViewCart';
 import AdminHome from './Pages/AdminHome/AdminHome';
 import Orders from './Pages/Orders/Orders';
-import { useEffect } from 'react';
 import ViewOrder from './Pages/ViewOrder/ViewOrder';
 
 function App() {
  
-
-
      const loggedUser = {
       // userName: localStorage.getItem("userName"),
       token: localStorage.getItem("userToken"),
       userType: localStorage.getItem("userType") || "user"
     };
 
-
-
-   console.log("user token logic ",loggedUser.token && true)
   return (
     <div className="App_main">
       <Routes>
