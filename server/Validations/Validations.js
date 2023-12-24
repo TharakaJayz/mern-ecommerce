@@ -1,6 +1,6 @@
 const isEmptyValidator = (value) => {
    
-    let emptyCount =0;
+    let emptyCount = 0;
     for(const element of value){
         if(element ==="" || element === null){
             emptyCount ++;
