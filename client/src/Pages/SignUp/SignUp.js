@@ -63,16 +63,7 @@ const SignUp = () => {
     }
    try{
 
-    const respond = await axios.post("http://localhost:8081/api/v1/auth/signUp",{
-      email:emailInput,
-      password:passwordInput,
-      firstName:fNameInput,
-      lastName:LnameInput,
-      mobile:mobileInput,
-      address:addressInput
-    });
-    
-    // const respond = await axios.post("http://localhost:8080/auth/signUp",{
+    // const respond = await axios.post("http://localhost:8081/api/v1/auth/signUp",{
     //   email:emailInput,
     //   password:passwordInput,
     //   firstName:fNameInput,
@@ -80,6 +71,15 @@ const SignUp = () => {
     //   mobile:mobileInput,
     //   address:addressInput
     // });
+    
+    const respond = await axios.post("http://localhost:8080/auth/signUp",{
+      email:emailInput,
+      password:passwordInput,
+      firstName:fNameInput,
+      lastName:LnameInput,
+      mobile:mobileInput,
+      address:addressInput
+    });
     setDisplayCardLogic(true);
 
     console.log("sign in respond",respond);

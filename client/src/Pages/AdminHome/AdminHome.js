@@ -69,7 +69,7 @@ const AdminHome = () => {
     });
     try {
       const itemRespond = await axios.post(
-        "http://localhost:8081/api/v1/product/save",
+        "http://localhost:8080/product/add_product",
         {
             title:titleInput,
           description:descInput,

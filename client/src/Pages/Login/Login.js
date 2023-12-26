@@ -17,38 +17,28 @@ const Login = () => {
     }
 
     try {
-      if (isCheckd) {
-        //this is should be admin post request for anothe endpoint
-        const token = await axios.post(
-          "http://localhost:8081/api/v1/auth/signIn",
-          { email: email, password: Password }
-        );
+      const loginRespond = await axios.post(
+        "http://localhost:8080/auth/login",
+        { email: email, password: Password }
+      );
+      // const token = await axios.post(
+      //   "http://localhost:8081/api/v1/auth/signIn",
+      //   { email: email, password: Password }
+      // );
+      console.log("login respond from login", loginRespond);
 
-        localStorage.setItem("userToken", token.data.token);
-        localStorage.setItem("userName", email);
-        // localStorage.setItem("userType", "user");
-        localStorage.setItem("userType", "admin");
-        localStorage.setItem("cartItems",  JSON.stringify( {
+      localStorage.setItem("userToken", loginRespond.data.token);
+      localStorage.setItem("userName", email);
+      localStorage.setItem("firstName", loginRespond.data.firstname);
+      localStorage.setItem("userType", loginRespond.data.userType);
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify({
           cartItems: [],
           totalItems: 0,
           totalPrice: 0,
-        }));
-        navigation("/");
-        return;
-      }
-      const token = await axios.post(
-        "http://localhost:8081/api/v1/auth/signIn",
-        { email: email, password: Password }
+        })
       );
-
-      localStorage.setItem("userToken", token.data.token);
-      localStorage.setItem("userName", email);
-      localStorage.setItem("userType", "user");
-      localStorage.setItem("cartItems",  JSON.stringify( {
-        cartItems: [],
-        totalItems: 0,
-        totalPrice: 0,
-      }));
       navigation("/");
     } catch (err) {
       console.log(err);
@@ -88,14 +78,14 @@ const Login = () => {
           {error[0] && <p> {error[1]}</p>}
           <div id="admin_div">
             <section>
-              <input
+              {/* <input
                 type="checkbox"
                 value="admin"
                 onChange={(e) => {
                   setIsChecked(e.target.checked);
                 }}
-              />
-              <span>Admin</span>
+              /> */}
+              {/* <span>Admin</span> */}
             </section>
             <button>Login</button>
           </div>

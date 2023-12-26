@@ -1,10 +1,11 @@
 const isEmptyValidator = require("../Validations/Validations");
 const Product = require("../models/product");
+
 exports.createProduct = async (req, res, next) => {
   const title = req.body.title;
   const description = req.body.description;
-  const price = req.body.price;
-  const quantity = req.body.quantity;
+  const price = parseInt(req.body.price);
+  const quantity = parseInt(req.body.quantity);
   const brand = req.body.brand;
   const imageUrl = req.body.imageUrl;
   const categoryId = req.body.categoryId;
@@ -39,7 +40,7 @@ exports.createProduct = async (req, res, next) => {
       !(typeof price === "number" && !Number.isNaN(price)) &&
       !(typeof quantity === "number" && !Number.isNaN(quantity))
     ) {
-      const error = new Error("Price and quantity should be integer 1");
+      const error = new Error("Price and quantity should be integer !");
       error.statusCode = 400;
       return next(error);
     }
@@ -71,6 +72,21 @@ exports.createProduct = async (req, res, next) => {
     res.status(201).json({
       message: "product created Succefully !",
       details: product,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.getAllProducts = async (req, res, next) => {
+  try {
+    const allProducts = await Product.find();
+    res.json({
+      message: "product fetching successfull !",
+      details: allProducts,
     });
   } catch (err) {
     if (!err.statusCode) {

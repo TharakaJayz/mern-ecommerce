@@ -16,11 +16,14 @@ const Home = () => {
     const gettingItems = async () => {
       try {
         const itemsFromBackend = await axios.get(
-          "http://localhost:8081/api/v1/product/all product"
+          "http://localhost:8080/product/all_products"
         );
-        console.log("items in DB", itemsFromBackend.data);
-        setItems(itemsFromBackend.data);
-        console.log("back items in home",itemsFromBackend.data)
+        // const itemsFromBackend = await axios.get(
+        //   "http://localhost:8081/api/v1/product/all product"
+        // );
+        console.log("items in DB", itemsFromBackend.data.details);
+        setItems(itemsFromBackend.data.details);
+        console.log("back items in home",itemsFromBackend.data.details)
       } catch (err) {
         console.log("item fetching error", err);
       }
@@ -111,7 +114,7 @@ const Home = () => {
                       title={item.title}
                       price={item.price}
                       qty={item.quantity}
-                      id={item.id.toString() }
+                      id={item._id.toString() }
                       brand={item.brand}
                       description={item.description}
                     />{" "}
@@ -131,7 +134,7 @@ const Home = () => {
                       title={item.title}
                       price={item.price}
                       qty={item.quantity}
-                      id={item.id.toString() }
+                      id={item._id.toString() }
                       brand={item.brand}
                       description={item.description}
                     />{" "}
@@ -153,7 +156,7 @@ const Home = () => {
                       title={item.title}
                       price={item.price}
                       qty={item.quantity}
-                      id={item.id.toString() }
+                      id={item._id.toString() }
                       brand={item.brand}
                       description={item.description}
                     />{" "}
@@ -171,11 +174,11 @@ const Home = () => {
                   <div key={item.id}>
                     {" "}
                     <ItemCard
-                      imageUrl={item.imageUrl}
+                      imageUrl={item.imageUrl.toString()}
                       title={item.title}
                       price={item.price}
                       qty={item.quantity}
-                      id={item.id.toString() }
+                      id={item._id.toString() }
                       brand={item.brand}
                       description={item.description}
                     />{" "}

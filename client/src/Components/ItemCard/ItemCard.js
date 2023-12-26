@@ -10,8 +10,8 @@ const ItemCard = (props) => {
     dispatch(
       cartActions.addToCart({
         item: props.title,
-        price: props.price,
-        qty: props.qty,
+        price: parseInt(props.price),
+        qty: parseInt(props.qty),
         id: props.id.trim(),
         ORDQTY: 1,
         brand: props.brand,
@@ -19,9 +19,10 @@ const ItemCard = (props) => {
     );
   };
 
+
   return (
     <div className="item_main">
-      <img src={props.imageUrl} alt="head phone" id="item_img" />
+      <img src={props.imageUrl} alt="item" id="item_img" />
       <div className="item_main_wrapper">
         <span className="item_main_span left_align">{props.description}</span>
         <h3 className="item_main_h3 left_align">RS:{props.price}</h3>

@@ -40,11 +40,11 @@ const ViewCart = () => {
     const getItems = async () => {
       try {
         const itemsFromBackend = await axios.get(
-          "http://localhost:8081/api/v1/product/all product"
+          "http://localhost:8080/product/all_products"
         );
         // console.log("items in DB", itemsFromBackend.data);
-        setItems(itemsFromBackend.data);
-        return itemsFromBackend.data;
+        setItems(itemsFromBackend.data.details);
+        return itemsFromBackend.data.details;
       } catch (err) {
         // console.log("item fetching error", err);
         return [];
@@ -53,7 +53,6 @@ const ViewCart = () => {
 
     getItems();
 
-    console.log("items from db");
   }, []);
 
   const navigatoin = useNavigate();
@@ -63,8 +62,8 @@ const ViewCart = () => {
     dispatch(
       cartActions.addToCart({
         item: value.item,
-        price: value.price,
-        qty: value.qty,
+        price: parseInt(value.price),
+        qty: parseInt(value.qty),
         id: value.id,
         ORDQTY: value.ORDQTY,
       })
@@ -74,7 +73,7 @@ const ViewCart = () => {
     dispatch(
       cartActions.removeFromCart({
         id: value.id,
-        price: value.price,
+        price: parseInt(value.price),
         ORDQTY: value.ORDQTY,
       })
     );
@@ -163,9 +162,9 @@ const ViewCart = () => {
           {console.log("comparing arrays", "array2", items)}
           {cartItems.cartItems.map((cartItem) => {
             return items.map((item) => {
-              if (item.id + "" === cartItem.id) {
+              if (item._id + "" === cartItem.id) {
                 return (
-                  <div className="VC_item" key={item.id}>
+                  <div className="VC_item" key={item._id}>
                     <section className="Item_sec-1">
                       <section className="IT_Sec-1_left">
                         <img src={item.imageUrl} alt="item" />
@@ -182,7 +181,7 @@ const ViewCart = () => {
                         <button
                           onClick={() => {
                             deleteButtonHandler({
-                              id: item.id.toString(),
+                              id: item._id.toString(),
                               price: item.price,
                               ORDQTY: cartItem.ORDQTY,
                             });
@@ -196,7 +195,7 @@ const ViewCart = () => {
                         <button
                           onClick={() => {
                             decreaseHandler({
-                              id: item.id.toString(),
+                              id: item._id.toString(),
                               price: item.price,
                               ORDQTY: cartItem.ORDQTY,
                             });
@@ -211,7 +210,7 @@ const ViewCart = () => {
                               item: item.description,
                               price: item.price,
                               qty: item.quantity,
-                              id: item.id.toString(),
+                              id: item._id.toString(),
                               ORDQTY: cartItem.ORDQTY,
                             });
                           }}

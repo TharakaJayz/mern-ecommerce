@@ -2,41 +2,33 @@ import { createSlice } from "@reduxjs/toolkit";
 // import { items } from "../Data/Data";
 import axios from "axios";
 
-
-
-
-
- const getItems = async()  =>{
-
+const getItems = async () => {
   try {
-     const itemsFromBackend = await axios.get(
-      "http://localhost:8081/api/v1/product/all product"
+    const itemsFromBackend = await axios.get(
+      "http://localhost:8080/product/all_products"
     );
     // console.log("items in DB", itemsFromBackend.data);
-    return itemsFromBackend.data;
-    
-    
+    return itemsFromBackend.data.details;
   } catch (err) {
-    // console.log("item fetching error", err);
+    console.log("item fetching error", err);
     return [];
   }
-}
+};
 
-let items = await getItems()
-
+let items = await getItems();
 
 // console.log("items in redux",items)
 const loggedUser = {
   // userName: localStorage.getItem("userName"),
   token: localStorage.getItem("userToken"),
   cartItems: JSON.parse(localStorage.getItem("cartItems")),
-  userType:localStorage.getItem("userType")
+  userType: localStorage.getItem("userType"),
 };
 
-
-
 let state =
-  loggedUser.token && loggedUser.cartItems.cartItems.length > 0 && loggedUser.userType === "user"
+  loggedUser.token &&
+  loggedUser.cartItems.cartItems.length > 0 &&
+  loggedUser.userType === "user"
     ? loggedUser.cartItems
     : {
         cartItems: [],
@@ -50,11 +42,11 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       let existingIndex = state.cartItems.findIndex(
-        (item) => item.id.trim() === action.payload.id.trim()
+        (item) => item.id === action.payload.id
       );
       // console.log("items in redux",items)
       const exisistingItemDetails = items.filter(
-        (singleItem) => singleItem.id == action.payload.id.trim()
+        (singleItem) => singleItem._id == action.payload.id
       )[0];
       // console.log("selected Item",exisistingItemDetails.quantity);
       if (existingIndex >= 0) {
@@ -90,8 +82,10 @@ const cartSlice = createSlice({
           // console.log("reduced ORDQTY", state.cartItems[existingIndex].ORDQTY);
           state.totalPrice -= action.payload.price;
           // console.log("reduced price", action.payload.price);
-          if(state.totalItems>0 && (state.cartItems[existingIndex].ORDQTY ===0)){
-
+          if (
+            state.totalItems > 0 &&
+            state.cartItems[existingIndex].ORDQTY === 0
+          ) {
             state.totalItems--;
           }
           return;
@@ -113,12 +107,11 @@ const cartSlice = createSlice({
       state.totalItems = state.cartItems.length;
       state.totalPrice -= action.payload.ORDQTY * action.payload.price;
     },
-    deleteCart(state){
+    deleteCart(state) {
       state.cartItems = [];
       state.totalItems = 0;
       state.totalPrice -= 0;
-
-    }
+    },
   },
 });
 
