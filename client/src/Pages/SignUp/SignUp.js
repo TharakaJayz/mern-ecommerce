@@ -71,6 +71,15 @@ const SignUp = () => {
       mobile:mobileInput,
       address:addressInput
     });
+    
+    // const respond = await axios.post("http://localhost:8080/auth/signUp",{
+    //   email:emailInput,
+    //   password:passwordInput,
+    //   firstName:fNameInput,
+    //   lastName:LnameInput,
+    //   mobile:mobileInput,
+    //   address:addressInput
+    // });
     setDisplayCardLogic(true);
 
     console.log("sign in respond",respond);
