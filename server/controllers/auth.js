@@ -11,24 +11,31 @@ exports.signUp = async (req, res, next) => {
   const mobile = req.body.mobile;
   const address = req.body.address;
   const userType = "user";
+  try {
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 400;
+    }
+    next(err);
+  }
   if (
     isEmptyValidator([email, password, firstName, lastName, mobile, address])
   ) {
-    const error = new Error("all Fields should be filled message");
+    const error = new Error("all Fields should be filled ");
     error.statusCode = 400;
-    throw error;
+    return next(error);
   } else {
     if (password.length <= 5) {
       const error2 = new Error("Password should have more than 5 characters");
       error2.statusCode = 400;
-      throw error2;
+      return next(error2);
     } else {
       try {
         let existingUserCount = await User.countDocuments({ email: email });
         if (existingUserCount !== 0) {
           const error = new Error("User with this email already exists");
           error.statusCode = 409;
-          throw error;
+          return next(error);
         }
 
         const hashedPassowrd = await bcrypt.hash(password, 12);
@@ -63,7 +70,7 @@ exports.login = async (req, res, next) => {
   if (isEmptyValidator([email, password])) {
     const error = new Error("All Fields Should be FIlled !");
     error.statusCode = 400;
-    throw error;
+    return next(error);
   }
 
   let existuser;
@@ -72,18 +79,16 @@ exports.login = async (req, res, next) => {
     if (!existuser) {
       const error = new Error("This email does not exists !");
       error.statusCode = 404;
-      throw error;
+      return next(error);
     }
 
     let comparePassword = await bcrypt.compare(password, existuser.password);
     if (!comparePassword) {
       const error = new Error("Invalid Passoword");
       error.statusCode = 401;
-      throw error;
+      return next(error);
     }
     // check for special admin login and if it is not true userType should be user
-    
-
 
     const token = jwt.sign(
       {
@@ -99,7 +104,7 @@ exports.login = async (req, res, next) => {
       message: "Login Successfull",
       token: token,
       firstname: existuser.firstname,
-      userType:existuser.userType
+      userType: existuser.userType,
     });
   } catch (err) {
     if (!err.statusCode) {

@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
+
 const authRoutes = require("./routes/auth");
+const productRoutes = require("./routes/product")
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -8,6 +10,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/auth", authRoutes);
+app.use("/product",productRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
