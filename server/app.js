@@ -19,7 +19,9 @@ try {
   mongoose.connect(
     "mongodb+srv://tharakaprabhath300:Tp0718736614@cluster0.zmt7ut1.mongodb.net/EAD?retryWrites=true&w=majority"
   );
-  app.listen(8080);
+  app.listen(8080, () => {
+    console.log("connected to 8080");
+  });
 } catch (err) {
   console.log("mongoose error", err);
 }
