@@ -2,6 +2,7 @@ const isEmptyValidator = require("../Validations/Validations");
 const Product = require("../models/product");
 
 exports.createProduct = async (req, res, next) => {
+  
   const title = req.body.title;
   const description = req.body.description;
   const price = parseInt(req.body.price);

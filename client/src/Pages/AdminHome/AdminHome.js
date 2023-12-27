@@ -12,7 +12,7 @@ const AdminHome = () => {
     userType: localStorage.getItem("userType") || "user",
   };
 
-  const [cardLogic,setCardLogic] = useState(false);
+  const [cardLogic, setCardLogic] = useState(false);
   const [titleInput, setTitleInput] = useState("");
   const [descInput, setDescInput] = useState("");
   const [priceInput, setPriceInput] = useState("");
@@ -23,24 +23,14 @@ const AdminHome = () => {
 
   const [error, setError] = useState({ logic: false, msg: "" });
 
-  const diplayCardHandler = (value)  =>{
-        if(value){
-            window.location.reload();
-        }
-  }
+  const diplayCardHandler = (value) => {
+    if (value) {
+      window.location.reload();
+    }
+  };
 
   const formHandler = async (e) => {
     e.preventDefault();
-    console.log(
-      "all inputs",
-      titleInput,
-      descInput,
-      priceInput,
-      qtyInput,
-      brandInput,
-      imageInput,
-      categoryInput
-    );
 
     if (
       checkEmpty(titleInput) ||
@@ -55,29 +45,20 @@ const AdminHome = () => {
         logic: true,
         msg: "All Fields Should Be Filled",
       });
-      console.log("hiii");
       return;
     }
-    console.log("item form data", {
-      title: titleInput,
-      description: descInput,
-      price: priceInput,
-      quantity: qtyInput,
-      brand: brandInput,
-      categoryId: categoryInput,
-      imageUrl: imageInput,
-    });
+
     try {
       const itemRespond = await axios.post(
         "http://localhost:8080/product/add_product",
         {
-            title:titleInput,
-          description:descInput,
-          price:priceInput,
-          quantity:qtyInput,
-          brand:brandInput,
-          categoryId:categoryInput,
-          imageUrl:imageInput
+          title: titleInput,
+          description: descInput,
+          price: priceInput,
+          quantity: qtyInput,
+          brand: brandInput,
+          categoryId: categoryInput,
+          imageUrl: imageInput,
         },
         {
           headers: {
@@ -85,18 +66,9 @@ const AdminHome = () => {
           },
         }
       );
-      // const itemRespond = await axios.post("http://localhost:8081/api/v1/product/save",{
-      //     title:titleInput,
-      //     description:descInput,
-      //     price:priceInput,
-      //     quantity:qtyInput,
-      //     brand:brandInput,
-      //     categoryId:categoryInput,
-      //     imageUrl:imageInput
-      // });
-      console.log("item post respoond ", itemRespond);
     } catch (err) {
-      console.log("item Post Error", err);
+      setError({ logic: true, msg: `${err.response.data.message}` });
+      return;
     }
 
     setError({ logic: false, msg: "" });
@@ -109,7 +81,6 @@ const AdminHome = () => {
     setBrandInput("");
     setImageInput("");
     setCategoryInput("");
-    // window.location.reload();
   };
 
   const cancelButtonHandler = () => {
@@ -129,14 +100,15 @@ const AdminHome = () => {
           <h2>Add New Product</h2>
           <div id="image_container">
             {" "}
-
-            {/* {imageInput ==="" ? <img src={imageInput} alt="item"  /> : <></>} */}
-          
-            
-
-
-
-            <img src={imageInput} alt="Item"  className={imageInput === "" ? "image_container_image image_hidden":"image_container_image"} />
+            <img
+              src={imageInput}
+              alt="Item"
+              className={
+                imageInput === ""
+                  ? "image_container_image image_hidden"
+                  : "image_container_image"
+              }
+            />
           </div>
 
           <section>
@@ -148,14 +120,13 @@ const AdminHome = () => {
               onChange={(e) => {
                 setTitleInput(e.target.value);
               }}
-
               className="AH_form_input"
             />
           </section>
           <section>
             <span>Description</span>
             <input
-            className="AH_form_input"
+              className="AH_form_input"
               type="text"
               name="description"
               value={descInput}
@@ -167,7 +138,7 @@ const AdminHome = () => {
           <section>
             <span>Price</span>
             <input
-            className="AH_form_input"
+              className="AH_form_input"
               type="text"
               name="Price"
               value={priceInput}
@@ -179,7 +150,7 @@ const AdminHome = () => {
           <section>
             <span>quantity</span>
             <input
-            className="AH_form_input"
+              className="AH_form_input"
               type="text"
               name="quantity"
               value={qtyInput}
@@ -191,7 +162,7 @@ const AdminHome = () => {
           <section>
             <span>brand</span>
             <input
-            className="AH_form_input"
+              className="AH_form_input"
               type="text"
               name="brand"
               value={brandInput}
@@ -202,16 +173,13 @@ const AdminHome = () => {
           </section>
           <section>
             <span>category</span>
-            {/* <input type='text' name='category' value={categoryInput} onChange={(e) =>{setCategoryInput(e.target.value)}}/>
-             */}
+
             <select
               value={categoryInput}
               onChange={(e) => {
                 setCategoryInput(e.target.value);
               }}
-
               className="AH_form_input_menu"
-
             >
               <option value=""></option>
               <option value="1">Mobile</option>
@@ -222,7 +190,7 @@ const AdminHome = () => {
           <section>
             <span>imageUrl</span>
             <input
-            className="AH_form_input"
+              className="AH_form_input"
               type="text"
               name="imageUrl"
               value={imageInput}
@@ -235,9 +203,11 @@ const AdminHome = () => {
           {error.logic && <p>{error.msg}</p>}
 
           <div className="AH_form_btn_div">
-            <button className="AH_form_btn_div_btn" type="submit">Add Item</button>
+            <button className="AH_form_btn_div_btn" type="submit">
+              Add Item
+            </button>
             <button
-            className="AH_form_btn_div_btn"
+              className="AH_form_btn_div_btn"
               onClick={() => {
                 cancelButtonHandler();
               }}
@@ -248,7 +218,16 @@ const AdminHome = () => {
           </div>
         </form>
       </div>
-      {cardLogic && (<ErrorCard details = {{message:"Item Added Successfully", btn1:[true,"ok"], btn2:[false,"cancel"]}} fn = {diplayCardHandler} />)}
+      {cardLogic && (
+        <ErrorCard
+          details={{
+            message: "Item Added Successfully",
+            btn1: [true, "ok"],
+            btn2: [false, "cancel"],
+          }}
+          fn={diplayCardHandler}
+        />
+      )}
     </div>
   );
 };
