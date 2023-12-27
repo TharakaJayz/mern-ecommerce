@@ -44,11 +44,11 @@ const cartSlice = createSlice({
       let existingIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      // console.log("items in redux",items)
+      // console.log("exsiting item index",existingIndex);
       const exisistingItemDetails = items.filter(
         (singleItem) => singleItem._id == action.payload.id
       )[0];
-      // console.log("selected Item",exisistingItemDetails.quantity);
+      // console.log("selected Item",exisistingItemDetails.quantity,state.cartItems[existingIndex].ORDQTY);
       if (existingIndex >= 0) {
         if (
           exisistingItemDetails.quantity > state.cartItems[existingIndex].ORDQTY

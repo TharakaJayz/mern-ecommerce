@@ -32,7 +32,7 @@ const ViewCart = () => {
       }
 
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      console.log("items from hardcoded", items);
+      // console.log("items from hardcoded", items);
     }
   }, [cartItems]);
 
@@ -52,7 +52,6 @@ const ViewCart = () => {
     };
 
     getItems();
-
   }, []);
 
   const navigatoin = useNavigate();
@@ -102,11 +101,11 @@ const ViewCart = () => {
 
     try {
       const orderRespond = await axios.post(
-        "http://localhost:8081/api/v1/order/create",
+        "http://localhost:8080/order/new_order",
         {
           userEmail: loggedUser.userName,
           orderItems: cartItems.cartItems.map((ordItem) => {
-            return { ...ordItem, quantity: ordItem.ORDQTY };
+            return { id:ordItem.id, ordqty:parseInt(ordItem.ORDQTY)};
           }),
           deliverId: 1,
         },
@@ -138,7 +137,7 @@ const ViewCart = () => {
 
   const diplayCardHandler2 = (value) => {
     if (value.btn1) {
-      console.log("ok clicked")
+      console.log("ok clicked");
       localStorage.removeItem("cartItems");
       localStorage.setItem(
         "cartItems",
@@ -158,8 +157,8 @@ const ViewCart = () => {
 
       <div className="viewCart_body">
         <div className="VC_body_left">
-          {console.log("comparing arrays", "array1", cartItems.cartItems)}
-          {console.log("comparing arrays", "array2", items)}
+          {/* {console.log("comparing arrays", "array1", cartItems.cartItems)} */}
+          {/* {console.log("comparing arrays", "array2", items)} */}
           {cartItems.cartItems.map((cartItem) => {
             return items.map((item) => {
               if (item._id + "" === cartItem.id) {
