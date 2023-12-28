@@ -149,6 +149,7 @@ const ViewCart = () => {
       );
       dispatch(cartActions.deleteCart());
       navigatoin("/");
+      window.location.reload();
     }
   };
   return (

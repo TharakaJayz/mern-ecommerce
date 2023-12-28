@@ -7,6 +7,7 @@ import ViewCart from './Pages/ViewCart/ViewCart';
 import AdminHome from './Pages/AdminHome/AdminHome';
 import Orders from './Pages/Orders/Orders';
 import ViewOrder from './Pages/ViewOrder/ViewOrder';
+import CustomerOrder from './Pages/CutomerOrder/CustomerOrder';
 
 function App() {
  
@@ -22,6 +23,7 @@ function App() {
         <Route path = "/"  element = {<Home/>}  />
         <Route path = "/signUp"  element = {<SignUp/>}  />
         <Route path = "/login"  element = {<Login/>}  />
+        <Route path = "/orders/:userID"  element = {<CustomerOrder/>}  />
         {loggedUser.token  && (
           <></>
           )}

@@ -1,0 +1,51 @@
+.customerOrder_main{
+    width: 100dvw;
+    overflow-x: hidden;
+    min-height:100dvh;
+}
+
+.customerOrder_main_content{
+    padding:var(--padding_main);
+    width: 100%;
+    height: var(--admin_home_height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+}
+
+.customerOrder_main_content_h1{
+    margin-top: 2vh;
+    text-align: center;
+}
+
+.customerOrder_main_content_section_main{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.customerOrder_main_content_section_main_div_main{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    width: 100%;
+}
+
+.section_main_div_main_sec-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.section_main_div_main_sec-2{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.section_main_div_main_sec-2 > img{
+    max-height: 100%;
+    width: 8vw;
+}
