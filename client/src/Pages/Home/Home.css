@@ -57,19 +57,29 @@
     
 }
 
+.btn2_style{
+    /* color: red; */
+}
+
 .sec-1_div{
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content:flex-start;
     align-items: center;
     border:2px solid transparent;
     gap: 1vw;
     font-weight: bold;
     cursor: pointer;
+    letter-spacing: 2px;
+    padding:1rem;
+    &:hover{
+         border-left:2px solid blue;
+    }
 }
 
 .sec_1_div_display{
     color: blue;
+   
 }
 .home_sec-2{
     flex: 4.5;

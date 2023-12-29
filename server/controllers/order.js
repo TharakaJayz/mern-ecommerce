@@ -65,7 +65,7 @@ exports.createOrder = async (req, res, next) => {
           return {
             title: exsistProduct.title,
             price: exsistProduct.price,
-            quantity: exsistProduct.quantity,
+            quantity: singleOrderdItem.ordqty,
             imageUrl: exsistProduct.imageUrl,
           };
         }
@@ -107,7 +107,6 @@ exports.createOrder = async (req, res, next) => {
 exports.getAllOrder = async (req, res, next) => {
   try {
     const allOrder = await Order.find();
-    console.log("all order in backend", allOrder);
     res.status(200).json({
       messsage: "order fetching successfull",
       details: allOrder,
@@ -119,3 +118,28 @@ exports.getAllOrder = async (req, res, next) => {
     next(err);
   }
 };
+
+
+exports.deleteOrder = async (req,res,next) =>{
+    const ordId = req.params.ordID;
+    try{
+      const deletedOrder = await Order.findOneAndUpdate({_id:ordId},{
+        $set:{
+          status:"Canceled"
+        }
+      },{
+        new:true
+      });
+      if(!deletedOrder){
+        const error =new Error("this order Could not find");
+        error.statusCode = 404;
+        return next(error);
+      }
+      res.status(201).json({message:"order deletion successfull !"})
+
+    }catch(err){
+      err.statusCode = 500;
+      next(err);
+    }
+
+} 

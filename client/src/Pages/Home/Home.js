@@ -42,12 +42,8 @@ const Home = () => {
         const itemsFromBackend = await axios.get(
           "http://localhost:8080/product/all_products"
         );
-        // const itemsFromBackend = await axios.get(
-        //   "http://localhost:8081/api/v1/product/all product"
-        // );
-        console.log("items in DB", itemsFromBackend.data.details);
+   
         setItems(itemsFromBackend.data.details);
-        console.log("back items in home", itemsFromBackend.data.details);
       } catch (err) {
         console.log("item fetching error", err);
       }

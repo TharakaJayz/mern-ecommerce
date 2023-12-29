@@ -4,23 +4,22 @@ import { BsCart } from "react-icons/bs";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { GiShop } from "react-icons/gi";
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+import ErrorCard from "../ErrorCard/ErrorCard";
 const Navbar = () => {
   const loggedUser = {
     // userName: localStorage.getItem("userName"),
     token: localStorage.getItem("userToken"),
     // userType:"admin",
     userType: localStorage.getItem("userType"),
-    
   };
   let loggerUserID;
-  if(loggedUser.token){
-
-     loggerUserID = jwtDecode(loggedUser.token).userId;
+  if (loggedUser.token) {
+    loggerUserID = jwtDecode(loggedUser.token).userId;
   }
   // console.log("logger user id",loggerUserID)
   const [cartLogic, setCartLogic] = useState(false);
-  const [divFocusLogic, setDivFocusLogic] = useState(false);
+  const [loginErrorLogic, setLoginErroLogic] = useState(false);
   const navigation = useNavigate();
 
   let cartItem = useSelector((state) => state.cart);
@@ -36,6 +35,26 @@ const Navbar = () => {
     }
   };
 
+  const logOutBtnHandler = () => {
+    setLoginErroLogic(true);
+   
+  };
+
+  const loginErroCardHandler = (value) => {
+    console.log("erro card callback",value);
+    if(value.btn1){
+      setLoginErroLogic(false);
+    }
+
+    if(value.btn2){
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("userType");
+      navigation("/");
+      window.location.reload();
+    }
+  };
   return (
     <div className="nav_main">
       <div className="nav_body">
@@ -50,18 +69,11 @@ const Navbar = () => {
           />
         </button>
         <div className="nav_body_btn_wrapper">
-      
-
           {loggedUser.token ? (
             <button
               className="nav_btn login"
               onClick={() => {
-                localStorage.removeItem("userToken");
-                localStorage.removeItem("userName");
-                localStorage.removeItem("cartItems");
-                localStorage.removeItem("userType");
-                navigation("/");
-                window.location.reload();
+                logOutBtnHandler();
               }}
             >
               Logout
@@ -87,7 +99,7 @@ const Navbar = () => {
               Sign Up
             </button>
           )}
-            {loggedUser.userType === "user" && (
+          {loggedUser.userType === "user" && (
             <button
               className="nav_btn signup"
               onClick={() => {
@@ -137,7 +149,6 @@ const Navbar = () => {
             </section>
           )}
 
-      
           <div
             tabIndex="0"
             onBlur={() => {
@@ -160,6 +171,17 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {loginErrorLogic && (
+
+      <ErrorCard
+        details={{
+          message: "Are You sure you want to logout ?",
+          btn1: [true, "Cancel","btn1_style"],
+          btn2: [true, "Logout","btn2_style"],
+        }}
+        fn={loginErroCardHandler}
+      />
+      )}
     </div>
   );
 };

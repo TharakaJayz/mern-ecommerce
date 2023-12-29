@@ -3,7 +3,6 @@ import "./ViewCart.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { items } from "../../Data/Data";
 import { cartActions } from "../../Store/Cart-slice";
 import { useNavigate } from "react-router";
 import ErrorCard from "../../Components/ErrorCard/ErrorCard";
@@ -93,36 +92,7 @@ const ViewCart = () => {
       // eror that should be tell to log into site
       setErrorLogic(true);
     }
-
-    console.log("this is the orderd item list", cartItems);
-    // parse endpoint to username and carItems
-    // then display succesfull message
-    // then redirrect to the home
-
-    try {
-      const orderRespond = await axios.post(
-        "http://localhost:8080/order/new_order",
-        {
-          userEmail: loggedUser.userName,
-          orderItems: cartItems.cartItems.map((ordItem) => {
-            return { id:ordItem.id, ordqty:parseInt(ordItem.ORDQTY)};
-          }),
-          deliverId: 1,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + loggedUser.token,
-          },
-        }
-      );
-
-      setErrorLogic2(true);
-
-      console.log("respond from adding order", orderRespond);
-    } catch (err) {
-      console.log("error when creating order", err);
-      return;
-    }
+    setErrorLogic2(true);
   };
 
   const diplayCardHandler = (value) => {
@@ -135,9 +105,30 @@ const ViewCart = () => {
     }
   };
 
-  const diplayCardHandler2 = (value) => {
+  const diplayCardHandler2 = async (value) => {
     if (value.btn1) {
-      console.log("ok clicked");
+      try {
+        const orderRespond = await axios.post(
+          "http://localhost:8080/order/new_order",
+          {
+            userEmail: loggedUser.userName,
+            orderItems: cartItems.cartItems.map((ordItem) => {
+              return { id: ordItem.id, ordqty: parseInt(ordItem.ORDQTY) };
+            }),
+            deliverId: 1,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + loggedUser.token,
+            },
+          }
+        );
+
+        console.log("respond from adding order", orderRespond);
+      } catch (err) {
+        console.log("error when creating order", err);
+        return;
+      }
       localStorage.removeItem("cartItems");
       localStorage.setItem(
         "cartItems",
@@ -150,6 +141,10 @@ const ViewCart = () => {
       dispatch(cartActions.deleteCart());
       navigatoin("/");
       window.location.reload();
+    }
+
+    if (value.btn2) {
+      setErrorLogic2(false);
     }
   };
   return (
@@ -257,9 +252,9 @@ const ViewCart = () => {
       {erroLogic2 && (
         <ErrorCard
           details={{
-            message: "Order Placement Succesfull",
+            message: "Are you sure to place this order ?",
             btn1: [true, "Ok"],
-            btn2: [false, "SignUp"],
+            btn2: [true, "Cancel"],
           }}
           fn={diplayCardHandler2}
         />
