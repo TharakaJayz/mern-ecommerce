@@ -27,7 +27,7 @@
     padding: 5vh 2vw;
     background-color: var(--admin_background);
     color: white;
-    position: relative;
+    /* position: relative; */
 }
 .AH_form > h2{
     font-size: 2rem;

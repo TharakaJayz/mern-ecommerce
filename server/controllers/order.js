@@ -143,3 +143,22 @@ exports.deleteOrder = async (req,res,next) =>{
     }
 
 } 
+
+exports.getOrderById = async (req,res,next) =>{
+  const ordId = req.params.ordID;
+  try{
+    const requiredOrder = await Order.findById({_id:ordId});
+    if(!requiredOrder){
+      const error = new Error("This order does not exsist");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    res.status(200).json({message:"order fetching by id successfull!",details:requiredOrder});
+
+
+  }catch(err){
+    err.statusCode = 500;
+    next(err);
+  }
+}

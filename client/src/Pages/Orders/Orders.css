@@ -1,7 +1,8 @@
 .order_main{
     width: 100vw;
     min-height: 100vh;
-    
+    max-width: 100vw;
+    overflow-x: hidden; 
 }
 
 .order_body{
@@ -16,7 +17,9 @@
 }
 
 .order_item{
-    width: 50%;
+    /* width: 50%;
+    height: 10vh; */
+    width: 50vw;
     height: 10vh;
     border: 2px solid black;
     display: flex;
@@ -34,6 +37,10 @@
 .OI_sec1{
     width: 100%;
     display: flex;
+    gap: 1vw;
     justify-content: space-between;
     padding: 0px 1vw;
+}
+.OI_sec1 > h2{
+    font-size: 1rem;
 }
