@@ -1,11 +1,78 @@
 .viewOrder_main{
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 .VO_body{
     width: 100%;
     padding: var(--padding_main);
+    padding-top: 5vh;
     display: flex;
+    align-items: flex-start;
+    justify-content: center;
   
+}
+
+.VO_body_content{
+    width: 60%;
+    padding:5vh 2vw;
+    border:2px solid rgb(92, 92, 92);
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    border-radius: 5px;
+}
+
+.VO_body_sec_1,.VO_body_sec_2{
+    display: flex;
+}
+
+.VO_body_sec_1 > div,.VO_body_sec_2 > div{
+    flex: 1;
+    display: flex;
+}
+
+
+.VO_body_sec_3{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.VO_body_sec_3 > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.VO_body_sec_3 > div > img{
+    width: 10%;
+    height: auto;
+}
+.VO_body_sec_4{
+    display: flex;
+    gap: 2vw;
+    justify-content: flex-end;
+}
+
+.VO_body_sec_4 > button{
+    cursor: pointer;
+    border:none;
+    padding:0.3rem 1rem;
+    border-radius: 5px;
+}
+
+#DeliverOrder_btn{
+    background-color: rgb(200, 197, 197);
+    color:rgb(0, 0, 0);
+    padding:0.3rem 1rem;
+    border-radius: 5px;
+}
+
+#DeleteOrder_btn{
+   
+    background-color: red;
+    color:white;
+    
 }
