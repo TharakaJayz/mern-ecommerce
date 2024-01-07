@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 const User = require("../models/user");
 const Order = require("../models/order");
+const DeletedOrder = require("../models/DeleteOrder");
 
 exports.createOrder = async (req, res, next) => {
   const orderItems = req.body.orderItems;
@@ -119,46 +120,124 @@ exports.getAllOrder = async (req, res, next) => {
   }
 };
 
-
-exports.deleteOrder = async (req,res,next) =>{
-    const ordId = req.params.ordID;
-    try{
-      const deletedOrder = await Order.findOneAndUpdate({_id:ordId},{
-        $set:{
-          status:"Canceled"
-        }
-      },{
-        new:true
-      });
-      if(!deletedOrder){
-        const error =new Error("this order Could not find");
-        error.statusCode = 404;
-        return next(error);
-      }
-      res.status(201).json({message:"order deletion successfull !"})
-
-    }catch(err){
-      err.statusCode = 500;
-      next(err);
-    }
-
-} 
-
-exports.getOrderById = async (req,res,next) =>{
+exports.deleteOrder = async (req, res, next) => {
   const ordId = req.params.ordID;
-  try{
-    const requiredOrder = await Order.findById({_id:ordId});
-    if(!requiredOrder){
+  try {
+    const deletedOrder = await Order.findOneAndUpdate(
+      { _id: ordId },
+      {
+        $set: {
+          status: "Canceled",
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    if (!deletedOrder) {
+      const error = new Error("this order Could not find");
+      error.statusCode = 404;
+      return next(error);
+    }
+    res.status(201).json({ message: "order deletion successfull !" });
+  } catch (err) {
+    err.statusCode = 500;
+    next(err);
+  }
+};
+
+exports.getOrderById = async (req, res, next) => {
+  const ordId = req.params.ordID;
+  try {
+    const requiredOrder = await Order.findById({ _id: ordId });
+    if (!requiredOrder) {
       const error = new Error("This order does not exsist");
       error.statusCode = 404;
       return next(error);
     }
 
-    res.status(200).json({message:"order fetching by id successfull!",details:requiredOrder});
-
-
-  }catch(err){
+    res.status(200).json({
+      message: "order fetching by id successfull!",
+      details: requiredOrder,
+    });
+  } catch (err) {
     err.statusCode = 500;
     next(err);
   }
-}
+};
+
+exports.deleteOrderById = async (req, res, next) => {
+  const ordId = req.params.ordID;
+  try {
+    const exisitingOrder = await Order.findByIdAndDelete(ordId);
+    if (!exisitingOrder) {
+      const error = new Error("This order could not delted !");
+      error.statusCode = 400;
+      return next(error);
+    }
+
+    // crate new data
+
+    const deltedOrder = new DeletedOrder({
+      custID: exisitingOrder.custID,
+      createdAt: exisitingOrder.createdAt,
+      status: exisitingOrder.status,
+      deliveryStatus: exisitingOrder.deliveryStatus,
+      items: exisitingOrder.items,
+    });
+
+    const deletedOrder = await deltedOrder.save();
+
+    if (!deletedOrder) {
+      console.log("creating deleted order error !");
+      return;
+    }
+    // console.log("deleted product",exisitingOrder);
+
+    if (!exisitingOrder) {
+      const error = new Error("Erorr when deleting order !");
+      error.statusCode = 404;
+      return next(err);
+    }
+
+    res.status(200).json({
+      message: "Order deltion successfull !",
+      data: exisitingOrder,
+    });
+  } catch (err) {
+    err.statusCode = 500;
+    next(err);
+  }
+};
+
+exports.deliverOrder = async (req, res, next) => {
+  const ordId = req.params.ordID;
+
+  try {
+    const exisitingOrderForDeliver = await Order.findByIdAndUpdate(
+      { _id: ordId },
+      {
+        $set: {
+          deliveryStatus: "Delivered",
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    if (!exisitingOrderForDeliver) {
+      const error = new Error("this order could not be deliverd!");
+      error.statusCode = 400;
+      return next(error);
+    }
+    res
+      .status(200)
+      .json({
+        message: "order Updation Successfull !",
+        details: exisitingOrderForDeliver,
+      });
+  } catch (err) {
+    err.statusCode = 500;
+    next(err);
+  }
+};

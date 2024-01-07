@@ -7,7 +7,6 @@ const Login = () => {
   const [error, setError] = useState([false, ""]);
   const [email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [isCheckd, setIsChecked] = useState(false);
   const navigation = useNavigate();
   const formHandler = async (e) => {
     e.preventDefault();
@@ -39,13 +38,14 @@ const Login = () => {
           totalPrice: 0,
         })
       );
+      setError([false, "all fine"]);
       navigation("/");
     } catch (err) {
-      console.log(err);
+      console.log("this is login error in frontend",err.response.data.message);
+      setError([true,err.response.data.message]);
+
     }
 
-    setError([false, "all fine"]);
-    // navigation("/");
   };
   return (
     <div className="login_main">
@@ -76,16 +76,10 @@ const Login = () => {
             />
           </section>
           {error[0] && <p> {error[1]}</p>}
+        
           <div id="admin_div">
             <section>
-              {/* <input
-                type="checkbox"
-                value="admin"
-                onChange={(e) => {
-                  setIsChecked(e.target.checked);
-                }}
-              /> */}
-              {/* <span>Admin</span> */}
+           
             </section>
             <button>Login</button>
           </div>

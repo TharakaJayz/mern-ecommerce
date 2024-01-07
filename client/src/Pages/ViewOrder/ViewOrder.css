@@ -33,6 +33,9 @@
     display: flex;
 }
 
+.VO_body_sec_2 > div{
+    gap: 1rem;
+}
 
 .VO_body_sec_3{
     width: 100%;
@@ -49,6 +52,11 @@
 .VO_body_sec_3 > div > img{
     width: 10%;
     height: auto;
+}
+
+.VO_body_sec_3 > div > h5{
+    display: flex;
+    gap: 1rem;
 }
 .VO_body_sec_4{
     display: flex;
